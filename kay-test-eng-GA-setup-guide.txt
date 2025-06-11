@@ -1,0 +1,95 @@
+# FILE: kay-test-eng-GA-setup-guide.txt  
+# Purpose: Full setup guide for connecting Google Analytics 4 (GA4) to the kay-test-eng GitHub Pages site  
+# Author: Kay (Taras Khamardiuk)  
+# Created: 2025-06-11  
+# Status: VALIDATED (matching live structure)  
+
+---
+
+## 🧩 PHASE 1: Create GA4 Property
+
+1. Go to https://analytics.google.com/
+2. Log in with Google account
+3. Admin → Create Property → Name: `kay-test-eng`
+4. Choose platform: **Web**
+5. Site URL: https://tk51.github.io/kay-test-en/
+6. Stream Name: `kay-test-en`
+7. Click Create
+
+---
+
+## 🎯 PHASE 2: Copy Global Site Tag
+
+1. After creating stream, you’ll land on Web Stream Details page
+2. Locate the **Global Site Tag (gtag.js)** block
+3. Copy the script — it looks like this:
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZXPEP66BQ');
+</script>
+
+---
+
+## 🧱 PHASE 3: Embed Tag into GitHub Pages HTML
+
+1. Go to: https://github.com/TK51/kay-test-en
+2. Navigate to `docs/index.html`
+3. Click ✏️ to edit
+4. Paste GA4 script into `<head>` section like this:
+
+<head>
+  <meta charset="UTF-8">
+  <title>Kay Config Test Site</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZZXPEP66BQ');
+  </script>
+</head>
+
+5. Scroll down and commit changes
+
+---
+
+## 🔍 PHASE 4: Verify Realtime Tracking
+
+1. Go to GA4 → Realtime
+2. Open your site in a new tab or incognito window
+3. You should see 1 user active within 1–2 minutes
+
+Optional tools:
+- Chrome: Tag Assistant Legacy (extension)
+- Chrome DevTools: check `gtag` is defined in console
+
+---
+
+## 💡 NOTE
+
+- GA4 data can be delayed by 5–10 min on static sites
+- Use “Realtime” tab for instant feedback
+- Pages in `/methods/`, `/video/` will also register as pageviews if navigated to
+
+---
+
+## ✅ CONFIG STATUS
+
+- GA4 Connected to Live Site
+- Measurement ID: G-ZZXPEP66BQ
+- Confirmed via live visit + Realtime dashboard
+
+---
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+AI Role: Career Strategist + Social Systems TSD  
+Tone: Strategic • Structural • Zero-Drift  
+Made: 2025-06-11  
+Goal: Enable tracking signal for test signal infrastructure buildout
