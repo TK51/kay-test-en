@@ -16,10 +16,25 @@
 <body>
 <h1>Kay Test Config Site (ENG)</h1>
 <ul>
-  <li><a href="configs/">Configs</a></li>
-  <li><a href="methods/">Cases</a></li>
-  <li><a href="download/">Downloads</a></li>
-  <li><a href="video/">Video Guides</a></li>
+  <!-- Config Nav -->
+  <li><a href="configs/"
+         onclick="gtag('event', 'click_signal_link', { 'category': 'nav', 'label': 'configs-folder' });">
+         View Configs</a></li>
+
+  <!-- Method Case -->
+  <li><a href="methods/case-alpha.html"
+         onclick="gtag('event', 'click_signal_link', { 'category': 'method', 'label': 'case-alpha' });">
+         Open Case Alpha</a></li>
+
+  <!-- Downloads -->
+  <li><a href="download/"
+         onclick="gtag('event', 'click_signal_link', { 'category': 'nav', 'label': 'downloads-folder' });">
+         Download Files</a></li>
+
+  <!-- Video -->
+  <li><a href="video/"
+         onclick="gtag('event', 'click_signal_link', { 'category': 'nav', 'label': 'video-folder' });">
+         Video Guides</a></li>
 </ul>
 </body>
 </html>
