@@ -1,0 +1,173 @@
+FILE: GA4-AIPOS-EVENT-AND-RENDER-RULES.txt  
+Purpose: Unified event tracking + content rendering policy for AIPOS static GitHub Pages sites  
+Author: Kay (Taras Khamardiuk)  
+Created: 2025-06-12  
+Status: Final — Schema Locked for SIGNAL Campaign  
+
+--------------------------------------------------------------------------------
+
+INTRODUCTION
+
+This document defines how to:
+1. Embed and configure Google Analytics 4 (GA4) tracking across static .html pages  
+2. Track user interaction events with config/method files  
+3. Correctly render markdown-written .txt configs for public viewing  
+4. Maintain consistency across AIPOS SIGNAL infrastructure  
+
+--------------------------------------------------------------------------------
+
+GA4 SETUP — GLOBAL PAGE TRACKING
+
+Paste the following block in the <head> of every .html page:
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-ZZXPEP66BQ');
+</script>
+
+Required on:
+- /index.html
+- /configs/*.html
+- /methods/*.html
+- /video/*.html
+- Any other viewer or landing page
+
+Automatically triggers:
+- GA4 event: page_view
+
+--------------------------------------------------------------------------------
+
+EVENT TRACKING — CANONICAL SCHEMA
+
+Event Name        | Trigger Context                  | Parameters
+------------------|----------------------------------|---------------------------
+page_view         | Fires automatically              | —
+download_click    | Click on a .txt file             | file: [filename.txt]
+click_config_viewer | Open viewer .html              | file, render
+method_open       | Open method page (.html)         | case: [method ID]
+cta_clicked       | Button/CTA click                 | label: [button text]
+
+--------------------------------------------------------------------------------
+
+EVENT EXAMPLES
+
+Download Link:
+<a href="kay-cfg-minimal.txt"
+   download
+   onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-minimal.txt' });">
+   Download Config
+</a>
+
+Viewer Link (Markdown Rendered):
+<a href="kay-cfg-minimal-viewer.html"
+   onclick="gtag('event', 'click_config_viewer', {
+     'file': 'kay-cfg-minimal-viewer.html',
+     'render': 'markdown-runtime'
+   });">
+   View Config
+</a>
+
+Method Link:
+<a href="methods/case-alpha.html"
+   onclick="gtag('event', 'method_open', { 'case': 'alpha' });">
+   View Case Alpha
+</a>
+
+CTA Button:
+<button onclick="gtag('event', 'cta_clicked', { 'label': 'Start Now' });">
+  Start Now
+</button>
+
+--------------------------------------------------------------------------------
+
+RENDER STRATEGY — .TXT CONFIGS
+
+TYPE A — Static Viewer (.html using <pre>)
+- Paste content manually
+- Looks like raw text
+- Pros: reliable, works offline
+- Cons: no Markdown rendering
+
+TYPE B — Markdown Viewer (JS-rendered)
+- Keep content in .txt written in Markdown
+- Use JS (marked.js) to convert and inject into HTML
+- Viewer loads .txt and parses with:
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  fetch('filename.txt')
+    .then(res => res.text())
+    .then(md => {
+      document.getElementById('viewer').innerHTML = marked.parse(md);
+    });
+</script>
+
+- Add GA tracking: render = markdown-runtime
+
+TYPE C — Raw Link Only
+- No formatting
+- Use for download only
+- Don’t rely on this for viewer readability
+
+--------------------------------------------------------------------------------
+
+FOLDER STRUCTURE — RECOMMENDED
+
+/docs/
+├── configs/
+│   ├── kay-cfg-base.txt
+│   ├── kay-cfg-base-viewer.html
+│   ├── index.html
+├── methods/
+│   ├── case-alpha.html
+│   ├── index.html
+├── video/
+│   ├── ios-guide.html
+│   ├── index.html
+├── GA4-AIPOS-EVENT-AND-RENDER-RULES.txt
+
+--------------------------------------------------------------------------------
+
+FOOTER FORMAT — STANDARD
+
+Each viewer .html must include:
+
+<div class="footer">
+  Static viewer render • /configs/kay-cfg-base.txt • #fromukrainianswithlovetohumankind
+</div>
+
+--------------------------------------------------------------------------------
+
+GA4 VERIFICATION
+
+Realtime GA4 Panel:
+- Visit: https://analytics.google.com/
+- Select kay-test-eng property
+- Open Realtime > Events
+
+Tag Debug Tool:
+- Chrome plugin: Tag Assistant (Legacy)
+- Use to confirm GA hits
+
+--------------------------------------------------------------------------------
+
+RULES ENFORCEMENT SUMMARY
+
+[✔] GA tag present in all .html files  
+[✔] page_view fires on each load  
+[✔] Config download uses: download_click  
+[✔] Viewer opens use: click_config_viewer (with render param)  
+[✔] Method pages use: method_open  
+[✔] CTA links use: cta_clicked (optional)  
+[✔] Markdown viewers flagged with: render = markdown-runtime  
+
+--------------------------------------------------------------------------------
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+AIPOS Runtime ID: kay-test-eng-v1  
+Maintained by: Taras Khamardiuk  
+Last Updated: 2025-06-12
