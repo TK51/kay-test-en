@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Kay Config Test Site</title>
+  <title>Video Guides – Kay Test</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
@@ -14,27 +14,26 @@
   </script>
 </head>
 <body>
-<h1>Kay Test Config Site (ENG)</h1>
+
+<h1>Video Guides</h1>
+
 <ul>
-  <!-- Config Nav -->
-  <li><a href="configs/"
-         onclick="gtag('event', 'click_signal_link', { 'category': 'nav', 'label': 'configs-folder' });">
-         View Configs</a></li>
-
-  <!-- Method Case -->
-  <li><a href="methods/case-alpha.html"
-         onclick="gtag('event', 'click_signal_link', { 'category': 'method', 'label': 'case-alpha' });">
-         Open Case Alpha</a></li>
-
-  <!-- Downloads -->
-  <li><a href="download/"
-         onclick="gtag('event', 'click_signal_link', { 'category': 'nav', 'label': 'downloads-folder' });">
-         Download Files</a></li>
-
-  <!-- Video -->
-  <li><a href="video/"
-         onclick="gtag('event', 'click_signal_link', { 'category': 'nav', 'label': 'video-folder' });">
-         Video Guides</a></li>
+  <li>
+    <a href="ios-guide.html"
+       onclick="gtag('event', 'click_signal_link', { 'category': 'video', 'label': 'ios-guide' });">
+       iOS Setup Guide</a>
+  </li>
+  <li>
+    <a href="android-guide.html"
+       onclick="gtag('event', 'click_signal_link', { 'category': 'video', 'label': 'android-guide' });">
+       Android Setup Guide</a>
+  </li>
+  <li>
+    <a href="ga4-event-tracking-stub.html"
+       onclick="gtag('event', 'click_signal_link', { 'category': 'test', 'label': 'ga4-event-stub' });">
+       GA4 Event Tracking Stub Page</a>
+  </li>
 </ul>
+
 </body>
 </html>
