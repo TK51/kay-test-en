@@ -13,40 +13,8 @@
 Yours,
 
 Kay
-
-# Base config dummy
-
-## Super base
-
-### Super Upper base
-
-- d
-- u
-- m
-- m
-- y
-
-Kay style, testing
-
-Thank you, watcher
-
-========================
-
-Base config dummy
-
-Super base
-
-Super Upper base
-
-- d
-- u
-- m
-- m
-- y
-
-Kay style, testing
-=========================
-
+=====================================
++++++++++++++++++++++++++++++++++++++
 # === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
 ## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
 ### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
