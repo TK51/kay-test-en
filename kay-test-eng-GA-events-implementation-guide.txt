@@ -1,0 +1,144 @@
+# FILE: kay-test-eng-GA-events-implementation-guide.txt  
+# Purpose: Full implementation instructions for GA4 event tracking across all pages of the Kay Test Site  
+# Author: Kay (Taras Khamardiuk)  
+# Created: 2025-06-11  
+# Status: AIPOS-Validated — Production Tracking Blueprint  
+
+---
+
+## 🧩 INTRODUCTION
+
+This file defines where and how to embed Google Analytics 4 (GA4) tracking logic across a static HTML GitHub Pages site.  
+Covers all required placements for page views, clicks, downloads, and event interactions.
+
+GA4 Property Measurement ID: G-ZZXPEP66BQ  
+Applicable Site: https://tk51.github.io/kay-test-en/
+
+---
+
+## [GLOBAL] PAGEVIEW TRACKING
+
+Goal: Track page visits on all `.html` files  
+Where to add: Inside <head> of every `.html` page  
+What to paste: GA4 global tag (see below)  
+Required: YES
+
+Paste this block before </head> in every page:
+------------------------------------------------
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZXPEP66BQ');
+</script>
+------------------------------------------------
+
+This enables automatic `page_view` events in GA4.  
+Required for: /index.html, /methods/*.html, /configs/*.html, /video/*.html
+
+---
+
+## [EVENT] TRACKING DOWNLOAD CLICKS
+
+Goal: Track config or method `.txt` downloads  
+Where to add: Inside any <a> tag that links to `.txt` files  
+What to paste: `onclick` event inside the anchor  
+Required: Optional (but useful for measuring engagement)
+
+Example (copy this for any download link):
+------------------------------------------------
+<a href="download/kay-cfg-base.txt"
+   onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
+   Download Base Config
+</a>
+------------------------------------------------
+
+Tracked Event: download_click  
+Parameter: file = file name downloaded
+
+---
+
+## [EVENT] TRACKING METHOD PAGE VISITS (FROM LINK)
+
+Goal: Track clicks to method cases (`.html` pages)  
+Where to add: Inside any <a> tag linking to method HTML  
+What to paste: `onclick` inside anchor  
+Required: Optional (useful for SIGNAL attention tracking)
+
+Example:
+------------------------------------------------
+<a href="methods/case-alpha.html"
+   onclick="gtag('event', 'method_open', { 'case': 'alpha' });">
+   View Case Alpha
+</a>
+------------------------------------------------
+
+Tracked Event: method_open  
+Parameter: case = short method identifier
+
+---
+
+## [EVENT] TRACKING CTA BUTTON CLICKS
+
+Goal: Track structured interaction (e.g., Start, Submit, Help)  
+Where to add: Inside <button> or styled <a>  
+What to paste: `onclick` inline handler  
+Required: Optional
+
+Example:
+------------------------------------------------
+<button onclick="gtag('event', 'cta_clicked', { 'label': 'Start Now' });">
+  Start Now
+</button>
+------------------------------------------------
+
+Tracked Event: cta_clicked  
+Parameter: label = button purpose or copy text
+
+---
+
+## [EVENT VERIFICATION IN GA4]
+
+Method 1 — Realtime Panel:
+- Go to https://analytics.google.com/
+- Choose property: kay-test-eng
+- Reports → Realtime
+- Open site in incognito tab
+- Click method link or download
+- Watch for events in the stream
+
+Method 2 — Tag Debugger:
+- Use Chrome plugin: “Tag Assistant Legacy”
+- Load page, activate plugin, click test links
+- View event transmission logs
+
+---
+
+## [BEST PRACTICE CHECKLIST]
+
+[✔] GA tag embedded in <head> of every .html  
+[✔] page_view fires on every file with tag  
+[✔] All <a> downloads use gtag('event', 'download_click')  
+[✔] Method links use gtag('event', 'method_open')  
+[ ] Optional CTAs use gtag('event', 'cta_clicked')
+
+---
+
+## [EVENT SCHEMA SUMMARY]
+
+| Event Name       | Trigger Context             | Parameters Used       |
+|------------------|------------------------------|------------------------|
+| page_view        | Auto on page load            | page_path              |
+| download_click   | Clicking .txt <a> links      | file                   |
+| method_open      | Clicking a method .html link | case                   |
+| cta_clicked      | Clicking CTA buttons         | label                  |
+
+---
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+AI Role: Civic Signal Architect • Analytics Layer  
+Tone: Structural • Precise • Reusable  
+Made: 2025-06-11  
+Goal: Deliver exact GA4 logic map for static signal infrastructure
