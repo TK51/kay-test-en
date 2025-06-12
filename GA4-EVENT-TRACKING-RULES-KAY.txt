@@ -1,0 +1,133 @@
+# FILE: GA4-EVENT-TRACKING-RULES-KAY.txt
+# Purpose: Defines the exact schema, trigger logic, and implementation placements for all Google Analytics 4 events used across the AIPOS GitHub Pages site
+# Status: ✅ AIPOS-Validated — Ready for Public Signal Monitoring
+# Author: Kay (Taras Khamardiuk)
+# Date: 2025-06-11
+
+---
+
+## 🔁 OVERVIEW
+
+This document lists all event types tracked via GA4 on the AIPOS site, including:
+- Pageview
+- File Downloads
+- Markdown/Config Viewers
+- Method Interactions
+- CTA Buttons
+
+---
+
+## [EVENT 01] `page_view`
+
+| Trigger | On every `.html` page load |
+| Params  | `page_path` (auto GA4 param) |
+| Script  | GA4 global tag (must be in `<head>`) |
+| Required | YES |
+
+How to embed (inside every `<head>`):
+--------------------------------------------------
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZXPEP66BQ');
+</script>
+--------------------------------------------------
+
+---
+
+## [EVENT 02] `download_click`
+
+| Trigger | When user clicks to download a `.txt` file |
+| Params  | `file` = filename (e.g., `kay-cfg-base.txt`) |
+| Required | Optional (but highly recommended) |
+
+How to embed (inside `<a>`):
+--------------------------------------------------
+<a href="configs/kay-cfg-base.txt" download
+   onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
+   Download: kay-cfg-base.txt
+</a>
+--------------------------------------------------
+
+Note: You must manually add `download` to the anchor tag to enable proper browser behavior.
+
+---
+
+## [EVENT 03] `click_config_viewer`
+
+| Trigger | When user opens a config viewer `.html` file |
+| Params  | `file` = filename (e.g., `kay-cfg-minimal-viewer.html`)  
+|         | `render` = viewer type (`markdown-runtime`, `html-static`, `pre-block`) |
+| Required | Recommended for usage profiling |
+
+How to embed (inside `<a>`):
+--------------------------------------------------
+<a href="configs/kay-cfg-minimal-viewer.html"
+   onclick="gtag('event', 'click_config_viewer', {
+     'file': 'kay-cfg-minimal-viewer.html',
+     'render': 'markdown-runtime'
+   });">
+   View: kay-cfg-minimal
+</a>
+--------------------------------------------------
+
+---
+
+## [EVENT 04] `method_open`
+
+| Trigger | Clicking into a method `.html` |
+| Params  | `case` = method name (e.g., `alpha`) |
+| Required | Optional (for method usage stats) |
+
+How to embed (inside `<a>`):
+--------------------------------------------------
+<a href="methods/case-alpha.html"
+   onclick="gtag('event', 'method_open', { 'case': 'alpha' });">
+   Open Method: Case Alpha
+</a>
+--------------------------------------------------
+
+---
+
+## [EVENT 05] `cta_clicked`
+
+| Trigger | Any custom CTA button (e.g., "Start", "Download All", etc.) |
+| Params  | `label` = CTA label text |
+| Required | Optional (for interaction clarity) |
+
+How to embed (inside `<button>` or `<a>`):
+--------------------------------------------------
+<button onclick="gtag('event', 'cta_clicked', {
+  'label': 'Start Config Guide'
+});">
+  Start Config Guide
+</button>
+--------------------------------------------------
+
+---
+
+## ✅ RECOMMENDED NAMING CONVENTIONS
+
+- `click_config_viewer` = for `.html` previewers of config `.txt`
+- `download_click` = for actual file downloads
+- `method_open` = for structured UX stories (AIPOS method cases)
+- `cta_clicked` = for generic interaction buttons
+
+---
+
+## 📋 GA4 DEBUGGING METHODS
+
+1. Go to [analytics.google.com](https://analytics.google.com)
+2. Load site in incognito window
+3. Watch Realtime panel → Events stream
+4. Optional: Use Chrome extension “Tag Assistant Legacy” for live trace
+
+---
+
+Trace Signature: #fromukrainianswithlovetohumankind
+AI Role: Event Architect • Platform Tracker
+Tone: Raw • Verified • No Drift
+Version: 1.0 (Stable, 2025-06-11)
