@@ -1,34 +1,43 @@
-<!DOCTYPE html>
+import os
+import html
+
+# === CONFIGURATION ===
+INPUT_FOLDER = None  # Set to None for current dir
+OUTPUT_FOLDER = None
+GA4_ID = "G-ZZXPEP66BQ"
+
+# === HTML TEMPLATE ===
+HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kay-cfg-minimal — AIPOS Config Viewer</title>
+  <title>{title} — AIPOS Config Viewer</title>
 
   <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id={ga4_id}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag() {{ dataLayer.push(arguments); }}
     gtag('js', new Date());
-    gtag('config', 'G-ZZXPEP66BQ');
+    gtag('config', '{ga4_id}');
   </script>
 
   <style>
-    :root {
+    :root {{
       color-scheme: light dark;
-    }
+    }}
 
-    body {
+    body {{
       font-family: monospace;
       background-color: #ffffff;
       color: #000000;
       padding: 1rem;
       font-size: 16px;
       line-height: 1.6;
-    }
+    }}
 
-    pre {
+    pre {{
       white-space: pre-wrap;
       word-wrap: break-word;
       background: #f4f4f4;
@@ -36,125 +45,131 @@
       border-radius: 5px;
       overflow-x: auto;
       border: 1px solid #ccc;
-    }
+    }}
 
-    h1 {
+    h1 {{
       font-size: 1.4rem;
       margin-bottom: 0.75rem;
       border-bottom: 1px solid #ccc;
       padding-bottom: 0.3rem;
-    }
+    }}
 
-    .footer {
+    .footer {{
       margin-top: 2rem;
       font-size: 0.8rem;
       color: #555;
       border-top: 1px solid #ccc;
       padding-top: 0.5rem;
-    }
+    }}
 
-    .download-button {
+    .download-button {{
       display: inline-block;
       margin-top: 1rem;
       margin-bottom: 1rem;
       padding: 0.5rem 1rem;
-      background-color: #31A8FF;
-      color: #fff;
+      background-color: #E0E0E0;
+      color: #111111;
       text-decoration: none;
       border-radius: 4px;
       font-size: 0.95rem;
+      font-family: 'Roboto Mono', monospace;
       transition: background 0.2s ease-in-out;
-    }
+    }}
 
-    .download-button:hover {
-      background-color: #2499e3;
-    }
+    .download-button:hover {{
+      background-color: #B0B0B0;
+    }}
 
-    @media (prefers-color-scheme: dark) {
-      body {
+    @media (prefers-color-scheme: dark) {{
+      body {{
         background-color: #0d1117;
         color: #c9d1d9;
-      }
+      }}
 
-      pre {
+      pre {{
         background: #161b22;
         border: 1px solid #30363d;
-      }
+      }}
 
-      .footer {
+      .footer {{
         color: #999;
         border-top: 1px solid #333;
-      }
-    }
+      }}
+
+      .download-button {{
+        background-color: #30363d;
+        color: #c9d1d9;
+      }}
+
+      .download-button:hover {{
+        background-color: #505A62;
+      }}
+    }}
   </style>
 </head>
 <body>
 
-  <h1>AIPOS Config Viewer – kay-cfg-minimal.txt</h1>
+  <div style="margin: 1rem 0;">
+    <a class="download-button" href="/index.html" onclick="gtag('event', 'nav_click', {{ 'type': 'home' }});">🏠 Home</a>
+    <a class="download-button" href="javascript:history.back()" onclick="gtag('event', 'nav_click', {{ 'type': 'back' }});">← Back</a>
+  </div>
+
+  <h1>AIPOS Config Viewer – {filename}</h1>
 
   <a class="download-button"
-     href="../download/kay-cfg-minimal.txt"
+     href="../download/{filename}"
      download
-     onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-minimal.txt' });">
-     ⬇ Download kay-cfg-minimal.txt
+     onclick="gtag('event', 'download_click', {{ 'file': '{filename}' }});">
+     ⬇ Download {filename}
   </a>
 
-  <pre>KAY Viewer — kay-cfg-minimal.txt
-# Minimal config dummy
-
-## That is hi to my testers - THANK YOU ALL!
-
-### And I do really appreciate if you reached this page
-
-#### Really really really!
-
-- it is my project
-- it is my test
-- it is my approach to something new
-
-Yours,
-
-Kay
-
-    Kay
-=====================================
-+++++++++++++++++++++++++++++++++++++
-# === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-#### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-
-## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-Max Paste Size: ~90,000 characters (GPT-4o safe)  
-Max Files Per Paste: 10  
-Archive Support: .zip preferred for multi-file session packaging  
-Mobile Mode: Sequential file-paste supported
-
-### === CONTEXT SIZE LIMITS (As of 2025-05-27) ===============================
-- 
-┌────────────────────────────┬──────────────────────┬───────────────────────────┐  
-│        Model Tier          │     Input Limit      │     Character Capacity    │  
-├────────────────────────────┼──────────────────────┼───────────────────────────┤  
-│ GPT-4o (ChatGPT Pro)       │    128,000 tokens    │   ~90,000–100,000 chars   │  
-│ GPT-4 Turbo (ChatGPT Pro)  │    128,000 tokens    │   ~90,000–100,000 chars   │  
-│ GPT-4 (Legacy)             │     8K–32K tokens    │   ~6,000–25,000 chars     │  
-│ GPT-3.5 (Free Tier)        │      4,096 tokens    │   ~3,000–3,500 chars      │  
-└────────────────────────────┴──────────────────────┴───────────────────────────┘    
-
----
-  
-Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind</pre>
+  <pre>{filecontent}</pre>
 
   <a class="download-button"
-     href="../download/kay-cfg-minimal.txt"
+     href="../download/{filename}"
      download
-     onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-minimal.txt' });">
-     ⬇ Download kay-cfg-minimal.txt
+     onclick="gtag('event', 'download_click', {{ 'file': '{filename}' }});">
+     ⬇ Download {filename}
   </a>
 
   <div class="footer">
-    Static render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
+    Static viewer render • /configs/{filename} • #fromukrainianswithlovetohumankind
   </div>
 
 </body>
 </html>
+"""
+
+# === MAIN EXECUTION ===
+def main():
+    input_path = INPUT_FOLDER or os.getcwd()
+    output_path = OUTPUT_FOLDER or os.getcwd()
+
+    os.makedirs(output_path, exist_ok=True)
+
+    for filename in os.listdir(input_path):
+        if filename.lower().endswith(".txt"):
+            txt_path = os.path.join(input_path, filename)
+
+            with open(txt_path, "r", encoding="utf-8") as f:
+                raw_text = f.read()
+
+            sanitized = html.escape(raw_text)
+
+            html_content = HTML_TEMPLATE.format(
+                title=filename.replace(".txt", ""),
+                filename=filename,
+                filecontent=sanitized,
+                ga4_id=GA4_ID
+            )
+
+            output_filename = filename.replace(".txt", "-viewer.html")
+            output_path_full = os.path.join(output_path, output_filename)
+
+            with open(output_path_full, "w", encoding="utf-8") as f_out:
+                f_out.write(html_content)
+
+            print(f"✅ Created viewer: {output_filename}")
+
+if __name__ == "__main__":
+    main()
