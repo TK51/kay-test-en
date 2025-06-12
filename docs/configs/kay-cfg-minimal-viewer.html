@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kay-cfg-minimal — TEST Config Viewer</title>
+  <title>kay-cfg-minimal.txt — AIPOS Config Viewer</title>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
@@ -15,37 +15,52 @@
   </script>
 
   <style>
+    :root {
+      color-scheme: light dark;
+    }
+
     body {
       font-family: monospace;
-      background-color: #0d1117;
-      color: #c9d1d9;
+      background-color: #fafafa;
+      color: #111111;
       padding: 1rem;
       font-size: 16px;
       line-height: 1.6;
     }
 
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+      pre {
+        background: #161b22;
+        border-color: #30363d;
+      }
+    }
+
     h1 {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #e0e0e0;
       padding-bottom: 0.25rem;
     }
 
     pre {
       white-space: pre-wrap;
       word-wrap: break-word;
-      background: #161b22;
+      background: #f2f2f2;
       padding: 1em;
       border-radius: 5px;
       overflow-x: auto;
-      border: 1px solid #30363d;
+      border: 1px solid #e0e0e0;
     }
 
     .footer {
       margin-top: 2rem;
       font-size: 0.8rem;
-      color: #999;
-      border-top: 1px solid #333;
+      color: #777;
+      border-top: 1px solid #e0e0e0;
       padding-top: 0.5rem;
     }
 
@@ -70,7 +85,7 @@
 
   <h1>AIPOS Viewer — kay-cfg-minimal.txt</h1>
 
-  <pre>
+  <pre>KAY Viewer — kay-cfg-minimal.txt
 # Minimal config dummy
 
 ## That is hi to my testers - THANK YOU ALL!
@@ -87,6 +102,7 @@ Yours,
 
 Kay
 
+    Kay
 =====================================
 +++++++++++++++++++++++++++++++++++++
 # === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
@@ -112,7 +128,8 @@ Mobile Mode: Sequential file-paste supported
 └────────────────────────────┴──────────────────────┴───────────────────────────┘    
 
 ---
-  </pre>
+  
+Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind</pre>
 
   <a class="download-button"
      href="../download/kay-cfg-minimal.txt"
@@ -122,7 +139,7 @@ Mobile Mode: Sequential file-paste supported
   </a>
 
   <div class="footer">
-    Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
+    Static viewer render • kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
   </div>
 
 </body>
