@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GA4 Tracking Stub Page</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZZXPEP66BQ');
+  </script>
+</head>
+<body>
+  <h1>GA4 Event Tracking Test Page</h1>
+
+  <h2>Links with Tracked Events</h2>
+
+  <!-- Track method view -->
+  <p><a href="methods/case-alpha.html"
+        onclick="gtag('event', 'method_view', { 'case': 'Case Alpha' });">
+        View Method: Case Alpha
+     </a></p>
+
+  <!-- Track config download -->
+  <p><a href="download/kay-cfg-base.txt"
+        onclick="gtag('event', 'download_click', { 'label': 'Base Config' });">
+        Download Config: Base
+     </a></p>
+
+  <!-- Track multi-event interaction -->
+  <p><a href="methods/ev-infrastructure.html"
+        onclick="gtag('event', 'method_view', { 'case': 'EV Infra' });
+                 gtag('event', 'signal_step', { 'step': 'infrastructure-entry' });">
+        Open EV Infrastructure Case
+     </a></p>
+
+</body>
+</html>
