@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Video Guides</title>
+<head>
+  <meta charset="UTF-8">
+  <title>Video Guides – Kay Test</title>
 
-<!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-ZZXPEP66BQ');
-  </script></head>
+  </script>
+</head>
 <body>
-<h1>Guides</h1>
+
+<h1>Video Guides</h1>
+
 <ul>
-  <li><a href="ios-guide.html"
-         onclick="gtag('event', 'click_signal_link', { 'category': 'video', 'label': 'ios-guide' });">
-         iOS Guide</a></li>
+  <li>
+    <a href="ios-guide.html"
+       onclick="gtag('event', 'click_signal_link', { 'category': 'video', 'label': 'ios-guide' });">
+       iOS Setup Guide</a>
+  </li>
+  <li>
+    <a href="android-guide.html"
+       onclick="gtag('event', 'click_signal_link', { 'category': 'video', 'label': 'android-guide' });">
+       Android Setup Guide</a>
+  </li>
+  <li>
+    <a href="ga4-event-tracking-stub.html"
+       onclick="gtag('event', 'click_signal_link', { 'category': 'test', 'label': 'ga4-event-stub' });">
+       GA4 Event Tracking Stub Page</a>
+  </li>
 </ul>
+
 </body>
 </html>
