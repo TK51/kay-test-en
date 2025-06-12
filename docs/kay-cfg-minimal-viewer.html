@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kay-cfg-minimal — Viewer</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZZXPEP66BQ');
+  </script>
+
+  <!-- Markdown Rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #FAFAFA;
+      color: #111111;
+      padding: 1rem;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .viewer {
+      background: #f2f2f2;
+      border: 1px solid #E0E0E0;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    h1 {
+      font-size: 1.25rem;
+      color: #31A8FF;
+    }
+    a.download {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #31A8FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #B0B0B0;
+      border-top: 1px solid #E0E0E0;
+      padding-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Viewer — kay-cfg-minimal.txt</h1>
+
+<div class="viewer" id="viewer">Loading markdown...</div>
+
+<a class="download" href="../download/kay-cfg-minimal.txt" download onclick="gtag('event', 'download_click', {'file': '../download/kay-cfg-minimal.txt'});">
+  ⬇ Download ../download/kay-cfg-minimal.txt
+</a>
+
+<div class="footer">
+  Rendered with markdown • GA4 Enabled • Viewer for <code>../download/kay-cfg-minimal.txt</code>
+</div>
+
+<script>
+  fetch('../download/kay-cfg-minimal.txt')
+    .then(res => res.text())
+    .then(md => {
+      document.getElementById('viewer').innerHTML = marked.parse(md);
+    });
+</script>
+
+</body>
+</html>
