@@ -29,15 +29,15 @@ Super Upper base
 - y
 
 Kay style, testing
-
+#### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
 =========================
-# === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
+## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
 Max Paste Size: ~90,000 characters (GPT-4o safe)  
 Max Files Per Paste: 10  
 Archive Support: .zip preferred for multi-file session packaging  
 Mobile Mode: Sequential file-paste supported
 
-# === CONTEXT SIZE LIMITS (As of 2025-05-27) ===============================
+### === CONTEXT SIZE LIMITS (As of 2025-05-27) ===============================
 - 
 ┌────────────────────────────┬──────────────────────┬───────────────────────────┐  
 │        Model Tier          │     Input Limit      │     Character Capacity    │  
