@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kay-cfg-minimal.txt — AIPOS Config Viewer</title>
+  <title>kay-cfg-minimal — AIPOS Config Viewer</title>
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-ZZXPEP66BQ');
   </script>
@@ -18,16 +18,14 @@
     :root {
       color-scheme: light dark;
     }
-
     body {
       font-family: monospace;
-      background-color: #fafafa;
+      background-color: #FAFAFA;
       color: #111111;
       padding: 1rem;
       font-size: 16px;
       line-height: 1.6;
     }
-
     @media (prefers-color-scheme: dark) {
       body {
         background-color: #0d1117;
@@ -35,17 +33,19 @@
       }
       pre {
         background: #161b22;
-        border-color: #30363d;
+        border: 1px solid #30363d;
+      }
+      .footer {
+        border-top: 1px solid #333;
+        color: #999;
       }
     }
-
     h1 {
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
-      border-bottom: 1px solid #e0e0e0;
+      border-bottom: 1px solid #E0E0E0;
       padding-bottom: 0.25rem;
     }
-
     pre {
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -55,18 +55,17 @@
       overflow-x: auto;
       border: 1px solid #e0e0e0;
     }
-
     .footer {
       margin-top: 2rem;
       font-size: 0.8rem;
       color: #777;
-      border-top: 1px solid #e0e0e0;
+      border-top: 1px solid #ccc;
       padding-top: 0.5rem;
     }
-
     .download-button {
       display: inline-block;
       margin-top: 1rem;
+      margin-bottom: 1rem;
       padding: 0.5rem 1rem;
       background-color: #31A8FF;
       color: #fff;
@@ -75,7 +74,6 @@
       font-size: 0.95rem;
       transition: background 0.2s ease-in-out;
     }
-
     .download-button:hover {
       background-color: #2499e3;
     }
@@ -85,7 +83,15 @@
 
   <h1>AIPOS Viewer — kay-cfg-minimal.txt</h1>
 
-  <pre>KAY Viewer — kay-cfg-minimal.txt
+  <a class="download-button"
+     href="../download/kay-cfg-minimal.txt"
+     download
+     onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-minimal.txt' });">
+     ⬇ Download kay-cfg-minimal.txt
+  </a>
+
+  <pre>
+KAY Viewer — kay-cfg-minimal.txt
 # Minimal config dummy
 
 ## That is hi to my testers - THANK YOU ALL!
@@ -129,7 +135,8 @@ Mobile Mode: Sequential file-paste supported
 
 ---
   
-Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind</pre>
+Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
+  </pre>
 
   <a class="download-button"
      href="../download/kay-cfg-minimal.txt"
@@ -139,7 +146,7 @@ Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlov
   </a>
 
   <div class="footer">
-    Static viewer render • kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
+    Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
   </div>
 
 </body>
