@@ -1,0 +1,154 @@
+FILE: KAY-RENDER-RULES.txt  
+Purpose: Rendering formats and viewer logic for config/method .txt files on static GitHub Pages  
+Author: Kay (Taras Khamardiuk)  
+Created: 2025-06-12  
+Status: Final — Markdown Render Strategy Locked  
+
+--------------------------------------------------------------------------------
+
+GOAL
+
+Ensure that all configuration (.txt) and method files are:
+- ✅ Readable on mobile and desktop
+- ✅ Styled consistently with AIPOS system
+- ✅ Trackable via viewer links (if needed)
+- ✅ Able to preserve Markdown formatting where written
+
+--------------------------------------------------------------------------------
+
+SUPPORTED RENDER TYPES
+
+TYPE A — RAW STATIC VIEWER (using <pre>)
+
+• Description: HTML file renders .txt contents inside a <pre> block  
+• Markdown: NOT parsed (headers show as "#", etc.)  
+• Good for: system configs, logs, structure documents  
+• Pros: Works offline, full control, low dependency  
+• Cons: Not visually styled if markdown used  
+
+Example Structure:
+------------------------------------------------
+<pre>
+# Not parsed
+- Will stay like this
+</pre>
+------------------------------------------------
+
+Recommended use:  
+• /configs/kay-cfg-minimal-viewer.html  
+• /methods/case-alpha-viewer.html (if non-md)
+
+GA Tracking:  
+• click_config_viewer  
+• Optional: render = "raw-pre"
+
+--------------------------------------------------------------------------------
+
+TYPE B — MARKDOWN RUNTIME VIEWER (JS via marked.js)
+
+• Description: Viewer HTML file loads `.txt` and renders it using JavaScript  
+• Markdown: YES, fully parsed into HTML via `marked.js`  
+• Good for: human-readable configs, cases, presentation-layer SIGNAL drops  
+• Pros: Clean UX, auto-formatted  
+• Cons: Requires JS (marked.js), won't work offline unless bundled  
+
+Setup:
+------------------------------------------------
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  fetch('filename.txt')
+    .then(res => res.text())
+    .then(md => {
+      document.getElementById('viewer').innerHTML = marked.parse(md);
+    });
+</script>
+<div id="viewer"></div>
+------------------------------------------------
+
+Required GA Tag (in referring link):
+gtag('event', 'click_config_viewer', {
+  file: 'kay-cfg-base-viewer.html',
+  render: 'markdown-runtime'
+});
+
+Recommended use:  
+• /configs/kay-cfg-base-viewer.html  
+• /docs/ga4-event-template-viewer.html (if written in Markdown)
+
+--------------------------------------------------------------------------------
+
+TYPE C — DIRECT .TXT LINK (no viewer)
+
+• Description: Plain .txt file linked directly  
+• Markdown: NOT parsed  
+• UX: Poor on mobile (tiny font, no styling)  
+• GA: Can track with download_click event only  
+• No viewer, no layout control
+
+Example Link:
+------------------------------------------------
+<a href="kay-cfg-base.txt"
+   download
+   onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
+   Download Config
+</a>
+------------------------------------------------
+
+Use only when:
+• The file is meant to be saved, not viewed  
+• No markdown interpretation required  
+• You already have a proper viewer link alongside  
+
+--------------------------------------------------------------------------------
+
+RECOMMENDED STRATEGY
+
+For every `.txt` config or method:
+- Maintain `.txt` in markdown format
+- Create `.html` viewer using TYPE A or TYPE B
+- Track viewer links with GA4 event: `click_config_viewer`
+- Include "render" parameter to distinguish type:
+  • "markdown-runtime"
+  • "raw-pre"
+
+Index pages must link both:
+1. Downloadable `.txt`
+2. Viewer `.html` page
+
+--------------------------------------------------------------------------------
+
+FOLDER STRUCTURE EXAMPLE
+
+/docs/configs/
+├── kay-cfg-base.txt
+├── kay-cfg-base-viewer.html    ← (TYPE B viewer)
+├── index.html                  ← links both
+
+/methods/
+├── case-alpha.txt
+├── case-alpha-viewer.html      ← (TYPE A viewer)
+├── index.html
+
+--------------------------------------------------------------------------------
+
+FOOTER RECOMMENDATION FOR VIEWERS
+
+Each viewer should include this at the bottom:
+
+<div class="footer">
+  Rendered from /configs/kay-cfg-base.txt • Viewer type: markdown-runtime • #fromukrainianswithlovetohumankind
+</div>
+
+--------------------------------------------------------------------------------
+
+STATUS
+
+Render architecture is now fully aligned with:
+- AIPOS viewer UX rules
+- GA4 signal tracking
+- Mobile readability and fallback awareness
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+Maintained by: Taras Khamardiuk  
+Version: 1.0  
+Last Updated: 2025-06-12
