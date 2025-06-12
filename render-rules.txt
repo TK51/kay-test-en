@@ -1,0 +1,84 @@
+# FILE: render-rules.txt  
+# Purpose: Define rules and options for rendering .txt and .md files inside static GitHub Pages sites  
+# Author: Kay (Taras Khamardiuk)  
+# Created: 2025-06-11  
+# Status: AIPOS-Validated — Static Site Config Rendering Protocol  
+
+---
+
+## 📦 FILE TYPES UNDER REVIEW
+
+- `.txt`: Config files, logic samples, viewer-readable source
+- `.md`: Markdown-style layout text (optional)
+- `.html`: Render containers (viewer shells)
+
+---
+
+## 🧩 RENDERING STRATEGY OPTIONS
+
+1. **Preformatted Block** (RAW VIEW)
+   - 📄 `.txt` embedded in `<pre>` inside `.html`
+   - ✅ Easiest method
+   - ❌ No markdown support (no headers, no bullets styled)
+
+   Required Elements:
+   - HTML page per config (e.g. `kay-cfg-base-viewer.html`)
+   - Insert content manually inside:
+     ```html
+     <pre> ... content here ... </pre>
+     ```
+
+2. **Markdown Runtime Render**
+   - 📄 `.txt` or `.md` content is rendered with `marked.js` into proper HTML with styling
+   - ✅ Headers, lists, emphasis all supported
+   - ✅ Mobile-friendly and good readability
+   - ⚠️ Requires external script and minimal styling
+
+   Required HTML page:
+   - Include `marked.min.js`
+   - Inject content inside `<pre id="raw">` or `<div id="rendered">`
+   - Use:
+     ```js
+     document.getElementById('rendered').innerHTML =
+       marked.parse(`# My Header\n\n- List Item\n- List Item`);
+     ```
+
+3. **External .md Viewer Tools** (NOT RECOMMENDED FOR AIPOS)
+   - GitHub `.md` renderer or iframe
+   - ❌ No GA tracking
+   - ❌ No control over mobile styling
+   - ❌ Breaks repo independence
+
+---
+
+## 🛠 FILE NAMING RECOMMENDATIONS
+
+| Type | File Name Example | Viewer | Notes |
+|------|--------------------|--------|-------|
+| TXT  | `kay-cfg-base.txt` | Yes    | Source file |
+| HTML Viewer (Raw) | `kay-cfg-base-viewer.html` | Yes | Uses `<pre>` |
+| HTML Viewer (MD) | `kay-cfg-base-md.html` | Yes | Uses `marked.js` |
+
+---
+
+## 🔍 VIEWER USAGE PATTERN
+
+Every `.txt` config file must have one of the following:
+
+- ✅ Raw Download Link (`download`)
+- ✅ HTML Viewer Page (`-viewer.html`)
+- ✅ (Optional) Markdown View (`-md.html` if styling is priority)
+
+---
+
+## ⚠️ DO NOT
+
+- ❌ Load `.txt` directly as site page (no GA tracking, no styling)
+- ❌ Depend on GitHub preview as main UX path
+- ❌ Skip `meta viewport` or you’ll break mobile scale
+
+---
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+AIPOS Runtime Class: HTML Renderer Protocols  
+Version: v1.0 (2025-06-11)  
