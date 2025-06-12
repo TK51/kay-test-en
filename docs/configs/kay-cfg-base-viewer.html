@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kay-cfg-base — Markdown Viewer</title>
+  <title>Base Config Viewer — Kay</title>
 
-  <!-- Google Analytics -->
+  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,7 +14,7 @@
     gtag('config', 'G-ZZXPEP66BQ');
   </script>
 
-  <!-- Markdown Rendering Library -->
+  <!-- Markdown Parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
@@ -22,71 +22,65 @@
       font-family: system-ui, sans-serif;
       background: #FAFAFA;
       color: #111111;
-      padding: 1rem;
+      padding: 1.5rem;
       line-height: 1.6;
       font-size: 16px;
     }
 
     h1 {
-      color: #111111;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
     }
 
-    .viewer {
+    .viewer-box {
       background: #f2f2f2;
       border: 1px solid #E0E0E0;
-      border-radius: 8px;
+      border-radius: 6px;
       padding: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
     }
 
     .download-btn {
       display: inline-block;
       background: #31A8FF;
       color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-weight: 500;
-      margin-bottom: 1.5rem;
+      font-weight: 600;
+      transition: background 0.3s;
     }
 
     .download-btn:hover {
-      background: #2593e8;
+      background: #2196f3;
     }
 
     .footer {
-      margin-top: 2rem;
+      margin-top: 3rem;
+      padding-top: 1rem;
       font-size: 0.85rem;
-      color: #B0B0B0;
+      color: #5C6370;
       border-top: 1px solid #E0E0E0;
-      padding-top: 0.5rem;
-    }
-
-    code {
-      background: #eee;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
     }
   </style>
 </head>
 <body>
 
-  <h1>kay-cfg-base.txt — Markdown Viewer</h1>
+  <h1>kay-cfg-base.txt Viewer</h1>
+
+  <div class="viewer-box" id="viewer">Loading config file…</div>
 
   <a class="download-btn"
      href="kay-cfg-base.txt"
      download
      onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
-    ⬇️ Download Config File
+     ⬇ Download .txt file
   </a>
 
-  <div id="viewer" class="viewer">Loading config...</div>
-
   <div class="footer">
-    Rendered from <code>kay-cfg-base.txt</code> using <code>marked.js</code> • Render type: markdown-runtime • Viewer colorized with #31A8FF  
-    <br>#fromukrainianswithlovetohumankind
+    Rendered from <code>kay-cfg-base.txt</code> • View only • Styled viewer  
+    <br/>Colors: Light Theme • Built by Kay • GA4 Event: <code>download_click</code>
   </div>
 
   <script>
@@ -94,6 +88,10 @@
       .then(response => response.text())
       .then(markdown => {
         document.getElementById('viewer').innerHTML = marked.parse(markdown);
+        gtag('event', 'click_config_viewer', {
+          file: 'kay-cfg-base-viewer.html',
+          render: 'markdown-runtime'
+        });
       });
   </script>
 
