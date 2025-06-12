@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kay-cfg-base — AIPOS Markdown Viewer</title>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZZXPEP66BQ');
+  </script>
+
+  <!-- Markdown rendering library -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #fefefe;
+      color: #111;
+      padding: 1rem;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    h1, h2, h3, h4 {
+      margin-top: 1.2rem;
+      color: #2a2a2a;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    .viewer {
+      background: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #777;
+      border-top: 1px solid #ccc;
+      padding-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>AIPOS Viewer — kay-cfg-base.txt</h1>
+
+  <div id="viewer" class="viewer">Loading config...</div>
+
+  <div class="footer">
+    Live-rendered markdown from <code>kay-cfg-base.txt</code> • Tracked with GA4  
+    <br>#fromukrainianswithlovetohumankind
+  </div>
+
+  <script>
+    fetch('kay-cfg-base.txt')
+      .then(response => response.text())
+      .then(markdown => {
+        document.getElementById('viewer').innerHTML = marked.parse(markdown);
+      });
+  </script>
+
+</body>
+</html>
