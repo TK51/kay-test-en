@@ -1,19 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Configs</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ZZXPEP66BQ');
-</script></head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration Files — AIPOS</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZZXPEP66BQ');
+  </script>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      padding: 1rem;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin-bottom: 0.75rem;
+    }
+
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #888;
+      border-top: 1px solid #ccc;
+      padding-top: 0.5rem;
+    }
+  </style>
+</head>
 <body>
-<h1>Configuration Files</h1>
-<ul>
-  <li><a href="kay-cfg-base.txt">kay-cfg-base.txt</a></li>
-  <li><a href="kay-cfg-minimal.txt">kay-cfg-minimal.txt</a></li>
-</ul>
-</body>
-</html>
+
+  <h1>Configuration Files</h1>
+
+  <ul>
+    <li>
+      <a href="kay-cfg-base.txt"
+         onclick="gtag('event', 'click_config_file', { 'file': 'kay-cfg-base.txt' });">
+         kay-cfg-base.txt
+      </a>
+    </li>
+    <l
