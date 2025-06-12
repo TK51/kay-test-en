@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kay-cfg-base — AIPOS Markdown Viewer</title>
+  <title>kay-cfg-base — Markdown Viewer</title>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
@@ -41,6 +41,26 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .download-box {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .download-box a {
+      background: #1a73e8;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .download-box a:hover {
+      background: #155bb5;
     }
 
     .footer {
@@ -54,13 +74,20 @@
 </head>
 <body>
 
-  <h1>AIPOS Viewer — kay-cfg-base.txt</h1>
+  <h1>kay-cfg-base.txt — Viewer</h1>
+
+  <div class="download-box">
+    <a href="kay-cfg-base.txt"
+       download
+       onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
+       ⬇️ Download this config
+    </a>
+  </div>
 
   <div id="viewer" class="viewer">Loading config...</div>
 
   <div class="footer">
-    Live-rendered markdown from <code>kay-cfg-base.txt</code> • Tracked with GA4  
-    <br>#fromukrainianswithlovetohumankind
+    Live-rendered markdown from <code>kay-cfg-base.txt</code> • Viewer: markdown-runtime  
   </div>
 
   <script>
