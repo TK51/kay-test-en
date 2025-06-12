@@ -1,0 +1,148 @@
+# FILE: GA4-monitoring-setup-static-site.txt  
+# Purpose: Full step-by-step instructions to set up GA4 monitoring dashboard and reporting for a static HTML GitHub Pages site  
+# Author: Kay (Taras Khamardiuk)  
+# Created: 2025-06-11  
+# Status: AIPOS-Validated | Strategic Analytics Layer
+
+---
+
+## 🧠 OVERVIEW
+
+This guide walks through how to convert raw GA4 events into a functional monitoring setup.  
+Focus is on SIGNAL site use-case: HTML-only site with `.txt` files, method pages, and tracked links.
+
+---
+
+## ✅ STEP 1 — ENABLE GOOGLE ANALYTICS 4 (GA4)
+
+Already done in previous steps:
+- GA4 property created
+- Global Site Tag installed on every `.html`
+- Inline events added for:
+  - method_open
+  - download_click
+  - video_open
+  - signal_step
+  - cta_clicked
+
+No further tag work required for monitoring setup.
+
+---
+
+## ✅ STEP 2 — VERIFY EVENTS ARE FIRING
+
+1. Go to https://analytics.google.com/
+2. Select property: `kay-test-eng`
+3. Navigate: **Reports → Realtime**
+4. Open site in separate tab → Click through:
+   - Method case
+   - Download `.txt`
+   - Video guide
+5. Confirm events show up:
+   - `page_view`
+   - `download_click`
+   - `method_open`
+   - `video_open`
+   - `signal_step` (if used)
+
+---
+
+## ✅ STEP 3 — CREATE CUSTOM EVENT REPORT
+
+1. In GA4, click: **Reports** (left sidebar)
+2. Click: **Library** (bottom of reports list)
+3. Under Collections, click: **+ Create new report**
+
+Report Type: **Events**
+
+4. Choose dimension: `event_name`  
+   → Add as primary dimension
+
+5. Click “Add metric”:
+   - `event count`
+   - `engagement time`
+   - `users`
+
+6. Save as:  
+   `🔎 SIGNAL Events Summary`
+
+---
+
+## ✅ STEP 4 — BUILD A CUSTOM DASHBOARD (EXPLORATIONS)
+
+1. Go to: **Explore → Blank**
+2. Title: `SIGNAL Activity Map`
+
+### Step 4.1 — Set Dimensions
+Click “+” next to Dimensions → Import:
+
+- `page_path`
+- `event_name`
+- `event count`
+- `link_text` (if applicable)
+- `page_title`
+
+### Step 4.2 — Add Rows and Columns
+Rows: `event_name`  
+Columns: `page_path`  
+Values: `event count`
+
+This shows which events happened on which page.
+
+---
+
+## ✅ STEP 5 — FILTER FOR DOWNLOADS / METHODS
+
+In your `SIGNAL Activity Map`:
+
+- Click “Filter” → Add:
+  - Include event_name = `download_click`
+  - Include event_name = `method_open`
+
+Save filter set as:  
+📦 `Action Events Only`
+
+---
+
+## ✅ STEP 6 — SET EMAIL ALERTS (Optional)
+
+GA4 does not support native alert emails for custom events.  
+Use third-party add-ons or connect BigQuery to enable this.
+
+---
+
+## ✅ STEP 7 — CREATE SHORTCUT LINKS FOR MONITORING
+
+In GA4 interface:
+
+- Open your custom report or dashboard
+- Copy full URL from browser
+- Save it to your local system dashboard (or GitHub `/docs/monitoring-links.txt`)
+
+---
+
+## 🧩 SUGGESTED MONITORING CHECKPOINTS
+
+| Metric                | Check Frequency | Goal                             |
+|-----------------------|------------------|----------------------------------|
+| Unique page views     | Weekly           | Track reach of method cases      |
+| Download clicks       | Daily (post-drop)| Measure config uptake            |
+| Video opens           | Weekly           | Track guide usage post-deploy    |
+| Custom event spikes   | Live (Realtime)  | Signal response after post-drop  |
+| Drop-off pages        | Monthly          | UX failures in signal chain      |
+
+---
+
+## 🧠 FUTURE UPGRADE OPTIONS
+
+- Connect GA4 to BigQuery → build real dashboards in Looker Studio
+- Use regex match on `page_path` to auto-cluster method families
+- Set event funnel: `method_open → signal_step → download_click`
+
+---
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+Role: GA4 Signal Architect • Monitoring Designer  
+Tone: Structural • Tactical • Manual-Ready  
+Date: 2025-06-11  
+Status: MONITORING LOGIC DEPLOYED
