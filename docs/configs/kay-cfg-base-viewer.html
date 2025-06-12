@@ -14,80 +14,79 @@
     gtag('config', 'G-ZZXPEP66BQ');
   </script>
 
-  <!-- Markdown rendering library -->
+  <!-- Markdown Rendering Library -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
     body {
       font-family: system-ui, sans-serif;
-      background: #fefefe;
-      color: #111;
+      background: #FAFAFA;
+      color: #111111;
       padding: 1rem;
       line-height: 1.6;
       font-size: 16px;
     }
 
-    h1, h2, h3, h4 {
-      margin-top: 1.2rem;
-      color: #2a2a2a;
-    }
-
-    ul {
-      padding-left: 1.5rem;
+    h1 {
+      color: #111111;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .viewer {
       background: #f2f2f2;
-      border: 1px solid #ccc;
+      border: 1px solid #E0E0E0;
       border-radius: 8px;
       padding: 1rem;
       margin-bottom: 1rem;
     }
 
-    .download-box {
-      display: flex;
-      justify-content: flex-start;
+    .download-btn {
+      display: inline-block;
+      background: #31A8FF;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
       margin-bottom: 1.5rem;
     }
 
-    .download-box a {
-      background: #1a73e8;
-      color: white;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-
-    .download-box a:hover {
-      background: #155bb5;
+    .download-btn:hover {
+      background: #2593e8;
     }
 
     .footer {
       margin-top: 2rem;
       font-size: 0.85rem;
-      color: #777;
-      border-top: 1px solid #ccc;
+      color: #B0B0B0;
+      border-top: 1px solid #E0E0E0;
       padding-top: 0.5rem;
+    }
+
+    code {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
 
-  <h1>kay-cfg-base.txt — Viewer</h1>
+  <h1>kay-cfg-base.txt — Markdown Viewer</h1>
 
-  <div class="download-box">
-    <a href="kay-cfg-base.txt"
-       download
-       onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
-       ⬇️ Download this config
-    </a>
-  </div>
+  <a class="download-btn"
+     href="kay-cfg-base.txt"
+     download
+     onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
+    ⬇️ Download Config File
+  </a>
 
   <div id="viewer" class="viewer">Loading config...</div>
 
   <div class="footer">
-    Live-rendered markdown from <code>kay-cfg-base.txt</code> • Viewer: markdown-runtime  
+    Rendered from <code>kay-cfg-base.txt</code> using <code>marked.js</code> • Render type: markdown-runtime • Viewer colorized with #31A8FF  
+    <br>#fromukrainianswithlovetohumankind
   </div>
 
   <script>
