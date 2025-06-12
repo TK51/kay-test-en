@@ -1,154 +1,155 @@
-FILE: KAY-RENDER-RULES.txt  
-Purpose: Rendering formats and viewer logic for config/method .txt files on static GitHub Pages  
-Author: Kay (Taras Khamardiuk)  
-Created: 2025-06-12  
-Status: Final — Markdown Render Strategy Locked  
+# FILE: KAY-RENDER-RULES.txt
+# Purpose: Define rules and options for rendering .txt and .md files inside static GitHub Pages sites  
+# Author: Kay (Taras Khamardiuk)  
+# Created: 2025-06-12  
+# Status: Final — Markdown & Viewer Logic Consolidated  
 
 --------------------------------------------------------------------------------
 
-GOAL
+## GOAL
 
-Ensure that all configuration (.txt) and method files are:
-- ✅ Readable on mobile and desktop
-- ✅ Styled consistently with AIPOS system
-- ✅ Trackable via viewer links (if needed)
-- ✅ Able to preserve Markdown formatting where written
+Define how `.txt` and `.md` files should be rendered inside GitHub Pages sites  
+— with mobile readiness, visual clarity, and tracking compatibility.
 
 --------------------------------------------------------------------------------
 
-SUPPORTED RENDER TYPES
+## FILE TYPES REVIEWED
 
-TYPE A — RAW STATIC VIEWER (using <pre>)
+- `.txt`: Primary format for configs, readable files, logic artifacts  
+- `.md`: Markdown format (optional) — same logic, better style  
+- `.html`: Viewer wrappers — used to visually present `.txt` or `.md`  
+- `.js`: Only when using dynamic rendering (like marked.js)
 
-• Description: HTML file renders .txt contents inside a <pre> block  
-• Markdown: NOT parsed (headers show as "#", etc.)  
-• Good for: system configs, logs, structure documents  
-• Pros: Works offline, full control, low dependency  
-• Cons: Not visually styled if markdown used  
+--------------------------------------------------------------------------------
 
-Example Structure:
-------------------------------------------------
+## RENDERING OPTIONS
+
+### TYPE A — RAW STATIC VIEWER (Preformatted)
+
+• Description: .txt content pasted inside a <pre> block in an `.html` file  
+• Markdown: NOT parsed — rendered literally (e.g. `# Title` stays raw)  
+• Best for: system configs, non-style-dependent documents  
+• Works offline: ✅  
+• GA Trackable: ✅ (via HTML viewer link)
+
+— HTML Sample:
 <pre>
-# Not parsed
-- Will stay like this
+# Header stays raw
+- No markdown parsing
+- No style applied
 </pre>
-------------------------------------------------
 
-Recommended use:  
-• /configs/kay-cfg-minimal-viewer.html  
-• /methods/case-alpha-viewer.html (if non-md)
+— Required:
+- `filename-viewer.html` using <pre>  
+- Tracked via: `click_config_viewer`  
+- Param: `render: "raw-pre"`
 
-GA Tracking:  
-• click_config_viewer  
-• Optional: render = "raw-pre"
+---
 
---------------------------------------------------------------------------------
+### TYPE B — MARKDOWN RUNTIME VIEWER (via JS)
 
-TYPE B — MARKDOWN RUNTIME VIEWER (JS via marked.js)
+• Description: Uses JavaScript (`marked.js`) to load `.txt` or `.md`  
+• Markdown: Parsed into full HTML — supports headers, lists, etc.  
+• Best for: human-readable documents, public methods, SIGNAL drops  
+• Works offline: ❌ (unless marked.js is locally included)  
+• GA Trackable: ✅  
+• Mobile Ready: ✅
 
-• Description: Viewer HTML file loads `.txt` and renders it using JavaScript  
-• Markdown: YES, fully parsed into HTML via `marked.js`  
-• Good for: human-readable configs, cases, presentation-layer SIGNAL drops  
-• Pros: Clean UX, auto-formatted  
-• Cons: Requires JS (marked.js), won't work offline unless bundled  
-
-Setup:
-------------------------------------------------
+— Required Components:
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+— JavaScript Snippet:
 <script>
-  fetch('filename.txt')
-    .then(res => res.text())
-    .then(md => {
-      document.getElementById('viewer').innerHTML = marked.parse(md);
+  fetch('yourfile.txt')
+    .then(r => r.text())
+    .then(t => {
+      document.getElementById('viewer').innerHTML = marked.parse(t);
     });
 </script>
+
+— HTML must include:
 <div id="viewer"></div>
-------------------------------------------------
 
-Required GA Tag (in referring link):
-gtag('event', 'click_config_viewer', {
-  file: 'kay-cfg-base-viewer.html',
-  render: 'markdown-runtime'
-});
+— Tracked via: `click_config_viewer`  
+— Param: `render: "markdown-runtime"`
 
-Recommended use:  
-• /configs/kay-cfg-base-viewer.html  
-• /docs/ga4-event-template-viewer.html (if written in Markdown)
+---
 
---------------------------------------------------------------------------------
+### TYPE C — DIRECT DOWNLOAD LINK
 
-TYPE C — DIRECT .TXT LINK (no viewer)
-
-• Description: Plain .txt file linked directly  
+• Description: Plain `.txt` linked directly for download  
 • Markdown: NOT parsed  
-• UX: Poor on mobile (tiny font, no styling)  
-• GA: Can track with download_click event only  
-• No viewer, no layout control
+• Good for: raw saving, archival, audit trails  
+• GA Trackable: ✅ via `download_click`  
+• UX: Poor (small font, no layout)
 
-Example Link:
-------------------------------------------------
-<a href="kay-cfg-base.txt"
+— HTML Sample:
+<a href="yourfile.txt"
    download
-   onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
-   Download Config
+   onclick="gtag('event', 'download_click', { 'file': 'yourfile.txt' });">
+   Download File
 </a>
-------------------------------------------------
 
-Use only when:
-• The file is meant to be saved, not viewed  
-• No markdown interpretation required  
-• You already have a proper viewer link alongside  
+— Use only when:
+1. File isn’t meant to be viewed inline  
+2. A viewer is also available  
 
 --------------------------------------------------------------------------------
 
-RECOMMENDED STRATEGY
+## FILE NAMING LOGIC
 
-For every `.txt` config or method:
-- Maintain `.txt` in markdown format
-- Create `.html` viewer using TYPE A or TYPE B
-- Track viewer links with GA4 event: `click_config_viewer`
-- Include "render" parameter to distinguish type:
-  • "markdown-runtime"
-  • "raw-pre"
-
-Index pages must link both:
-1. Downloadable `.txt`
-2. Viewer `.html` page
+| Purpose         | File Name Example            | Type      |
+|-----------------|------------------------------|-----------|
+| Source Config   | kay-cfg-base.txt             | .txt      |
+| HTML Raw View   | kay-cfg-base-viewer.html     | TYPE A    |
+| Markdown Viewer | kay-cfg-base-md.html         | TYPE B    |
+| Method Case     | case-alpha.txt               | .txt      |
+| Method Viewer   | case-alpha-viewer.html       | A or B    |
 
 --------------------------------------------------------------------------------
 
-FOLDER STRUCTURE EXAMPLE
+## REQUIRED STRUCTURE
 
-/docs/configs/
-├── kay-cfg-base.txt
-├── kay-cfg-base-viewer.html    ← (TYPE B viewer)
-├── index.html                  ← links both
+For every `.txt` file you want public:
 
-/methods/
-├── case-alpha.txt
-├── case-alpha-viewer.html      ← (TYPE A viewer)
-├── index.html
+[1] Create `.html` viewer page  
+[2] Link both in index.html:  
+    • Download link → tracked with `download_click`  
+    • Viewer link → tracked with `click_config_viewer`  
+    • Viewer must declare render type (raw-pre or markdown-runtime)
+
+[3] Include `<meta name="viewport">` in all viewers  
+[4] Footer should show: source path + render type
 
 --------------------------------------------------------------------------------
 
-FOOTER RECOMMENDATION FOR VIEWERS
+## TRACKING EVENTS SUMMARY
 
-Each viewer should include this at the bottom:
+| GA4 Event        | Trigger                          | Parameters                         |
+|------------------|----------------------------------|-------------------------------------|
+| page_view        | Page load                        | auto                                |
+| download_click   | Downloading `.txt`               | file                                |
+| click_config_viewer | Clicking HTML viewer link     | file, render                        |
+
+--------------------------------------------------------------------------------
+
+## SAMPLE FOOTER FOR VIEWERS
 
 <div class="footer">
-  Rendered from /configs/kay-cfg-base.txt • Viewer type: markdown-runtime • #fromukrainianswithlovetohumankind
+  Rendered from /configs/kay-cfg-base.txt • Viewer type: markdown-runtime
 </div>
 
 --------------------------------------------------------------------------------
 
-STATUS
+## FINAL GUIDANCE
 
-Render architecture is now fully aligned with:
-- AIPOS viewer UX rules
-- GA4 signal tracking
-- Mobile readability and fallback awareness
+• Don’t skip viewer pages — they ensure readability  
+• Avoid using GitHub-native `.md` preview as your main UX  
+• Stick to one of the render strategies — A (raw) or B (md-style)  
+• Log viewer events via GA — they’re key for engagement trace
 
-Trace Signature: #fromukrainianswithlovetohumankind  
-Maintained by: Taras Khamardiuk  
-Version: 1.0  
-Last Updated: 2025-06-12
+--------------------------------------------------------------------------------
+
+Trace Signature: Kay (Taras Khamardiuk)  
+Version: v1.1  
+Last Updated: 2025-06-12  
