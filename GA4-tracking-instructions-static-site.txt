@@ -1,0 +1,158 @@
+# FILE: GA4-tracking-instructions-static-site.txt  
+# Purpose: Define EXACT instructions for making every .html, .txt, and embedded resource traceable on GitHub Pages using GA4  
+# Author: Kay (Taras Khamardiuk)  
+# Created: 2025-06-11  
+# Status: AIPOS-Validated | Runtime-Deployable
+
+---
+
+## 🔹 SECTION 1 — TRACKING EACH `.html` PAGE
+
+### Goal:
+Trigger `page_view` when any static `.html` is loaded.
+
+### Where:
+Paste this block INSIDE the <head> of every `.html` file.
+
+### Paste This:
+--------------------------------------------------------
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZXPEP66BQ');
+</script>
+--------------------------------------------------------
+
+### Placement Rule:
+Insert before the closing </head> tag.
+
+### GA Output:
+event_name = `page_view`  
+parameter: `page_path`, `page_location`
+
+---
+
+## 🔹 SECTION 2 — TRACKING `.txt` FILE DOWNLOADS
+
+### Goal:
+Track when user clicks a `.txt` config or method file.
+
+### Where:
+Inside an anchor (`<a>`) tag that links to the file.
+
+### Paste This:
+--------------------------------------------------------
+<a href="download/kay-cfg-base.txt"
+   onclick="gtag('event', 'download_click', { 'file': 'kay-cfg-base.txt' });">
+   Download Base Config
+</a>
+--------------------------------------------------------
+
+### Placement Rule:
+Embed in any HTML page that references `.txt` files.
+
+### GA Output:
+event_name = `download_click`  
+parameter: `file` (e.g., "kay-cfg-base.txt")
+
+---
+
+## 🔹 SECTION 3 — TRACKING VIDEO LINK CLICKS
+
+### Goal:
+Track when user clicks to watch video guides.
+
+### Where:
+Inside the HTML page that links to video file or YouTube embed.
+
+### Paste This:
+--------------------------------------------------------
+<a href="ios-guide.html"
+   onclick="gtag('event', 'video_open', { 'device': 'ios' });">
+   iOS Setup Guide
+</a>
+--------------------------------------------------------
+
+Optional YouTube embed click:
+--------------------------------------------------------
+<a href="https://www.youtube.com/watch?v=XXXXXXX"
+   target="_blank"
+   onclick="gtag('event', 'video_open', { 'type': 'youtube', 'label': 'config-ios' });">
+   Watch on YouTube
+</a>
+--------------------------------------------------------
+
+### GA Output:
+event_name = `video_open`  
+parameters: `device` or `type`, `label`
+
+---
+
+## 🔹 SECTION 4 — CUSTOM EVENT TRACKING STRUCTURE (GENERAL FORMAT)
+
+### Syntax for all GA4 inline HTML event tracking:
+--------------------------------------------------------
+onclick="gtag('event', 'EVENT_NAME', { 'parameter': 'value' });"
+--------------------------------------------------------
+
+### Example for multiple events in same click:
+--------------------------------------------------------
+onclick="gtag('event', 'method_open', { 'case': 'ev' }); gtag('event', 'signal_step', { 'step': '3' });"
+--------------------------------------------------------
+
+### Notes:
+- All inline JavaScript must be 1 line (no line breaks)
+- Every event will appear separately in GA4 dashboard
+
+---
+
+## 🔹 SECTION 5 — WHERE TO PLACE TRACKING CODE SITE-WIDE
+
+| File Type  | GA Tag Placement              | Event Code Placement                  |
+|------------|-------------------------------|----------------------------------------|
+| .html      | Inside <head> tag             | Inside <a> or <button> tags in <body> |
+| .txt       | No tag inside file itself     | Event tracked via `<a onclick>`       |
+| Video link | Inside page linking to video  | Same as `.txt` — use `<a onclick>`    |
+
+---
+
+## 🔹 SECTION 6 — GA4 CONFIGURATION: EVENT NAMING STANDARD
+
+| Event Name       | Trigger                | Parameters Used       |
+|------------------|------------------------|------------------------|
+| page_view        | Page load              | page_path, page_title |
+| download_click   | Link to `.txt` clicked | file                  |
+| method_open      | Method `.html` clicked | case                  |
+| signal_step      | Manual trigger         | step                  |
+| video_open       | Video guide clicked    | device, label         |
+| cta_clicked      | CTA button clicked     | label                 |
+
+---
+
+## 🔹 SECTION 7 — FUTURE GA5 NOTE
+
+As of 2025-06, GA5 is not publicly defined.  
+GA4 structure is event-based and JSON-safe — **future-proof for GA5 migration** if:
+- You use `gtag()` syntax
+- You avoid legacy `ga()` calls
+
+---
+
+## ✅ FINAL RULES
+
+[✔] Every .html must contain GA tag in <head>  
+[✔] Every tracked link must use inline `gtag('event'...)`  
+[✔] Do not embed tags inside .txt or video — track from parent .html  
+[✔] Use parameter values for dashboard segmentation  
+[✔] Keep all inline JS on single line — no line breaks
+
+---
+
+Trace Signature: #fromukrainianswithlovetohumankind  
+Author Runtime: Signal Ops Lead • Static Analytics Architect  
+Tone: Instructional • Raw • Ready for Tactical Deployment  
+Date: 2025-06-11  
+Status: STRUCTURE LOCKED
