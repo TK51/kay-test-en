@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generic Config Viewer — Demo</title>
+  <title>Generic Config Viewer — Test</title>
 
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
@@ -18,64 +18,70 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
+    :root {
+      color-scheme: light dark;
+    }
+
     body {
-      font-family: system-ui, sans-serif;
+      font-family: monospace;
       background: #FAFAFA;
-      color: #111111;
+      color: #111;
       padding: 1.5rem;
-      line-height: 1.6;
       font-size: 16px;
     }
 
     h1 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      margin: 1rem 0;
     }
 
-    .viewer-box {
-      background: #f2f2f2;
-      border: 1px solid #E0E0E0;
-      border-radius: 6px;
+    pre {
+      white-space: pre-wrap;
+      background: #f4f4f4;
       padding: 1rem;
-      margin-bottom: 2rem;
-      overflow-x: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
-    .download-btn, .nav-button {
+    a.nav-button,
+    a.download-button {
       display: inline-block;
-      margin: 0.5rem 0.5rem 1.5rem 0;
+      margin: 1rem 0.5rem 1.5rem 0;
       padding: 0.5rem 1rem;
       background: #E0E0E0;
       color: #111;
       text-decoration: none;
-      font-weight: 500;
-      border-radius: 5px;
-      border: 1px solid #bbb;
-    }
-
-    .download-btn:hover, .nav-button:hover {
-      background: #D5D5D5;
+      border-radius: 4px;
     }
 
     .footer {
       margin-top: 3rem;
-      padding-top: 1rem;
       font-size: 0.85rem;
-      color: #5C6370;
-      border-top: 1px solid #E0E0E0;
+      color: #555;
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
     }
 
     @media (prefers-color-scheme: dark) {
-      body { background: #0d1117; color: #c9d1d9; }
-      .viewer-box { background: #161b22; border-color: #30363d; }
-      .footer { border-top: 1px solid #333; color: #999; }
-      .download-btn, .nav-button {
+      body {
+        background: #0d1117;
+        color: #c9d1d9;
+      }
+
+      pre {
+        background: #161b22;
+        border-color: #30363d;
+      }
+
+      a.nav-button,
+      a.download-button {
         background: #30363d;
         color: #eee;
-        border: 1px solid #444;
       }
-      .download-btn:hover, .nav-button:hover {
-        background: #3a3f47;
+
+      .footer {
+        border-top: 1px solid #333;
+        color: #999;
       }
     }
   </style>
@@ -88,24 +94,30 @@
 
   <h1>Generic Config Viewer</h1>
 
-  <div class="viewer-box" id="viewer">Loading content...</div>
+  <!-- Viewer Container -->
+  <div class="viewer-box">
+    <pre id="viewer">Loading content…</pre>
+  </div>
 
-  <a class="download-btn"
+  <!-- Download Button -->
+  <a class="download-button"
      href="demo-config.txt"
      download
      onclick="gtag('event', 'download_click', { 'file': 'demo-config.txt' });">
-     ⬇ Download .txt file
+     ⬇ Download demo-config.txt
   </a>
 
+  <!-- Footer -->
   <div class="footer">
-    Rendered from <code>demo-config.txt</code> • Viewer Only • Markdown Enabled
+    Rendered from <code>demo-config.txt</code> • Static Viewer • Layout test with GA4 + Markdown
   </div>
 
+  <!-- Runtime Markdown Inject -->
   <script>
     fetch('demo-config.txt')
       .then(response => response.text())
-      .then(markdown => {
-        document.getElementById('viewer').innerHTML = marked.parse(markdown);
+      .then(text => {
+        document.getElementById('viewer').innerHTML = marked.parse(text);
         gtag('event', 'click_config_viewer', {
           file: 'viewer-demo-generic.html',
           render: 'markdown-runtime'
