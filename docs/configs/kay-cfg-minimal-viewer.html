@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kay-cfg-minimal — AIPOS Config Viewer</title>
+  <title>Generic Config Viewer — Demo</title>
 
-  <!-- Google Analytics -->
+  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,196 +14,107 @@
     gtag('config', 'G-ZZXPEP66BQ');
   </script>
 
+  <!-- Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <style>
-    :root {
-      color-scheme: light dark;
-    }
-
     body {
-      font-family: monospace;
-      background-color: #ffffff;
-      color: #000000;
-      padding: 1rem;
-      font-size: 16px;
+      font-family: system-ui, sans-serif;
+      background: #FAFAFA;
+      color: #111111;
+      padding: 1.5rem;
       line-height: 1.6;
-    }
-
-    pre {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      background: #f4f4f4;
-      padding: 1em;
-      border-radius: 5px;
-      overflow-x: auto;
-      border: 1px solid #ccc;
+      font-size: 16px;
     }
 
     h1 {
-      font-size: 1.4rem;
-      margin-bottom: 0.75rem;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 0.3rem;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .viewer-box {
+      background: #f2f2f2;
+      border: 1px solid #E0E0E0;
+      border-radius: 6px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+
+    .download-btn, .nav-button {
+      display: inline-block;
+      margin: 0.5rem 0.5rem 1.5rem 0;
+      padding: 0.5rem 1rem;
+      background: #E0E0E0;
+      color: #111;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 5px;
+      border: 1px solid #bbb;
+    }
+
+    .download-btn:hover, .nav-button:hover {
+      background: #D5D5D5;
     }
 
     .footer {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      color: #555;
-      border-top: 1px solid #ccc;
-      padding-top: 0.5rem;
-    }
-
-    /* === Navigation Buttons === */
-    .nav-button {
-      display: inline-block;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #E0E0E0;
-      color: #111111;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      font-family: 'Roboto Mono', monospace;
-      transition: background 0.2s ease-in-out;
-    }
-
-    .nav-button:hover {
-      background-color: #B0B0B0;
-    }
-
-    /* === Download Buttons === */
-    .download-button {
-      display: inline-block;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-      background-color: #E0E0E0;
-      color: #111111;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      font-family: 'Roboto Mono', monospace;
-      transition: background 0.2s ease-in-out;
-    }
-
-    .download-button:hover {
-      background-color: #B0B0B0;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      font-size: 0.85rem;
+      color: #5C6370;
+      border-top: 1px solid #E0E0E0;
     }
 
     @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #0d1117;
-        color: #c9d1d9;
+      body { background: #0d1117; color: #c9d1d9; }
+      .viewer-box { background: #161b22; border-color: #30363d; }
+      .footer { border-top: 1px solid #333; color: #999; }
+      .download-btn, .nav-button {
+        background: #30363d;
+        color: #eee;
+        border: 1px solid #444;
       }
-
-      pre {
-        background: #161b22;
-        border: 1px solid #30363d;
-      }
-
-      .footer {
-        color: #999;
-        border-top: 1px solid #333;
-      }
-
-      .nav-button {
-        background-color: #30363d;
-        color: #ffffff;
-      }
-
-      .nav-button:hover {
-        background-color: #505A62;
-      }
-
-      .download-button {
-        background-color: #30363d;
-        color: #E6EEF5;
-      }
-
-      .download-button:hover {
-        background-color: #505A62;
+      .download-btn:hover, .nav-button:hover {
+        background: #3a3f47;
       }
     }
   </style>
 </head>
 <body>
 
-  <div style="margin: 1rem 0;">
-    <a class="nav-button" href="https://tk51.github.io/kay-test-en/" onclick="gtag('event', 'nav_click', {'type': 'home'});">⌂ Home</a>
-    <a class="nav-button" href="javascript:history.back()" onclick="gtag('event', 'nav_click', {'type': 'back'});">← Back</a>
-  </div>
+  <!-- Navigation Buttons -->
+  <a class="nav-button" href="https://example.com/" onclick="gtag('event', 'nav_click', {'type': 'home'});">⌂ Home</a>
+  <a class="nav-button" href="javascript:history.back()" onclick="gtag('event', 'nav_click', {'type': 'back'});">← Back</a>
 
-  <h1>AIPOS Config Viewer – kay-cfg-minimal.txt</h1>
+  <h1>Generic Config Viewer</h1>
 
-  <a class="download-button"
-     href="../download/kay-cfg-minimal.txt"
+  <div class="viewer-box" id="viewer">Loading content...</div>
+
+  <a class="download-btn"
+     href="demo-config.txt"
      download
-     onclick="gtag('event', 'download_click', {'file': 'kay-cfg-minimal.txt'});">
-     ⬇ Download kay-cfg-minimal.txt
+     onclick="gtag('event', 'download_click', { 'file': 'demo-config.txt' });">
+     ⬇ Download .txt file
   </a>
-
-  <pre>KAY Viewer — kay-cfg-minimal.txt
-# Minimal config dummy
-
-## That is hi to my testers - THANK YOU ALL!
-
-### And I do really appreciate if you reached this page
-
-#### Really really really!
-
-- it is my project
-- it is my test
-- it is my approach to something new
-
-Yours,
-
-Kay
-
-    Kay
-=====================================
-+++++++++++++++++++++++++++++++++++++
-# === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-#### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-
-## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-Max Paste Size: ~90,000 characters (GPT-4o safe)  
-Max Files Per Paste: 10  
-Archive Support: .zip preferred for multi-file session packaging  
-Mobile Mode: Sequential file-paste supported
-
-### === CONTEXT SIZE LIMITS (As of 2025-05-27) ===============================
-- 
-┌────────────────────────────┬──────────────────────┬───────────────────────────┐  
-│        Model Tier          │     Input Limit      │     Character Capacity    │  
-├────────────────────────────┼──────────────────────┼───────────────────────────┤  
-│ GPT-4o (ChatGPT Pro)       │    128,000 tokens    │   ~90,000–100,000 chars   │  
-│ GPT-4 Turbo (ChatGPT Pro)  │    128,000 tokens    │   ~90,000–100,000 chars   │  
-│ GPT-4 (Legacy)             │     8K–32K tokens    │   ~6,000–25,000 chars     │  
-│ GPT-3.5 (Free Tier)        │      4,096 tokens    │   ~3,000–3,500 chars      │  
-└────────────────────────────┴──────────────────────┴───────────────────────────┘    
-
----
-  
-Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind</pre>
-
-  <a class="download-button"
-     href="../download/kay-cfg-minimal.txt"
-     download
-     onclick="gtag('event', 'download_click', {'file': 'kay-cfg-minimal.txt'});">
-     ⬇ Download kay-cfg-minimal.txt
-  </a>
-
-  <div style="margin: 1rem 0;">
-    <a class="nav-button" href="https://tk51.github.io/kay-test-en/" onclick="gtag('event', 'nav_click', {'type': 'home'});">⌂ Home</a>
-    <a class="nav-button" href="javascript:history.back()" onclick="gtag('event', 'nav_click', {'type': 'back'});">← Back</a>
-  </div>
 
   <div class="footer">
-    Static viewer render • /configs/kay-cfg-minimal.txt • #fromukrainianswithlovetohumankind
+    Rendered from <code>demo-config.txt</code> • Viewer Only • Markdown Enabled
   </div>
+
+  <script>
+    fetch('demo-config.txt')
+      .then(response => response.text())
+      .then(markdown => {
+        document.getElementById('viewer').innerHTML = marked.parse(markdown);
+        gtag('event', 'click_config_viewer', {
+          file: 'viewer-demo-generic.html',
+          render: 'markdown-runtime'
+        });
+      })
+      .catch(() => {
+        document.getElementById('viewer').textContent = "❌ Could not load demo-config.txt";
+      });
+  </script>
 
 </body>
 </html>
