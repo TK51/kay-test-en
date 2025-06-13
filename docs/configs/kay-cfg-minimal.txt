@@ -1,40 +1,107 @@
-# Minimal config dummy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>aipos-demo-config — AIPOS Viewer</title>
 
-## That is hi to my testers - THANK YOU ALL!
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZXPEP66BQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZZXPEP66BQ');
+  </script>
 
-### And I do really appreciate if you reached this page
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: monospace;
+      background: #FAFAFA;
+      color: #111;
+      padding: 1rem;
+      font-size: 16px;
+    }
+    pre {
+      white-space: pre-wrap;
+      background: #f4f4f4;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    a.nav-button, a.download-button {
+      display: inline-block;
+      margin: 1rem 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #E0E0E0;
+      color: #111;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      border-top: 1px solid #ccc;
+      padding-top: 0.5rem;
+      color: #555;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0d1117; color: #c9d1d9; }
+      pre { background: #161b22; border-color: #30363d; }
+      .footer { border-top: 1px solid #333; color: #999; }
+      a.nav-button, a.download-button { background: #30363d; color: #eee; }
+    }
+  </style>
+</head>
+<body>
 
-#### Really really really!
+<a class="nav-button" href="https://tk51.github.io/kay-test-en/" onclick="gtag('event', 'nav_click', {'type': 'home'});">⌂ Home</a>
+<a class="nav-button" href="javascript:history.back()" onclick="gtag('event', 'nav_click', {'type': 'back'});">← Back</a>
 
-- it is my project
-- it is my test
-- it is my approach to something new
+<h1>aipos-demo-config</h1>
 
-Yours,
+<a class="download-button"
+   href="../download/aipos-demo-config.txt"
+   download
+   onclick="gtag('event', 'download_click', {'file': 'aipos-demo-config.txt'});">
+   ⬇ Download aipos-demo-config.txt
+</a>
 
-Kay
-=====================================
-+++++++++++++++++++++++++++++++++++++
-# === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-#### === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
+<pre># aipos-demo-config.txt  
+# Version: TEST-VIEWER-1.0  
+# Purpose: Static viewer functionality demo for AIPOS GitHub Pages
 
-## === [ 11 ] SYSTEM LIMITS + INPUT RULES ==================================
-Max Paste Size: ~90,000 characters (GPT-4o safe)  
-Max Files Per Paste: 10  
-Archive Support: .zip preferred for multi-file session packaging  
-Mobile Mode: Sequential file-paste supported
+# HOW TO USE THIS FILE
+# This is a test render to verify:
+# - Font display
+# - Light/dark theme switching
+# - Button functionality
+# - Scroll behavior
+# - Analytics tracking (Google Tag ID: G-ZZXPEP66BQ)
 
-### === CONTEXT SIZE LIMITS (As of 2025-05-27) ===============================
-- 
-┌────────────────────────────┬──────────────────────┬───────────────────────────┐  
-│        Model Tier          │     Input Limit      │     Character Capacity    │  
-├────────────────────────────┼──────────────────────┼───────────────────────────┤  
-│ GPT-4o (ChatGPT Pro)       │    128,000 tokens    │   ~90,000–100,000 chars   │  
-│ GPT-4 Turbo (ChatGPT Pro)  │    128,000 tokens    │   ~90,000–100,000 chars   │  
-│ GPT-4 (Legacy)             │     8K–32K tokens    │   ~6,000–25,000 chars     │  
-│ GPT-3.5 (Free Tier)        │      4,096 tokens    │   ~3,000–3,500 chars      │  
-└────────────────────────────┴──────────────────────┴───────────────────────────┘    
+# DEMO BLOCK:
+# Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+# Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+# Sed nisi. Nulla quis sem at nibh elementum imperdiet.
 
----
+# END OF DEMO
+
+# Made by: Kay aka Taras Khamardiuk  
+# LinkedIn: https://www.linkedin.com/in/taras-khamardiuk  
+# Tag: #fromukrainianswithlovetohumankind
+</pre>
+
+<a class="download-button"
+   href="../download/aipos-demo-config.txt"
+   download
+   onclick="gtag('event', 'download_click', {'file': 'aipos-demo-config.txt'});">
+   ⬇ Download aipos-demo-config.txt
+</a>
+
+<div class="footer">
+  Static Viewer • aipos-public-eng-main/aipos-demo-config.txt • #aiposbuilt
+</div>
+
+</body>
+</html>
